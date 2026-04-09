@@ -12,7 +12,7 @@ class Payment extends Model
 
     protected $fillable = [
         'payment_number', 'appointment_id', 'amount',
-        'payment_method', 'payment_date', 'notes'
+        'payment_method', 'payment_mode', 'payment_date', 'notes'
     ];
 
     protected $casts = [
@@ -23,5 +23,17 @@ class Payment extends Model
     public function appointment()
     {
         return $this->belongsTo(Appointment::class);
+    }
+
+    // Scope for cash payments
+    public function scopeCash($query)
+    {
+        return $query->where('payment_mode', 'cash');
+    }
+
+    // Scope for online payments
+    public function scopeOnline($query)
+    {
+        return $query->where('payment_mode', 'online');
     }
 }

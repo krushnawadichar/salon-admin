@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Full Name"
                             id="name" name="name" value="{{ old('name') }}" required>
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -30,7 +30,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email"
                             id="email" name="email" value="{{ old('email') }}" required>
                         @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -39,7 +39,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror"
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter Phone"
                             id="phone" name="phone" value="{{ old('phone') }}" required>
                         @error('phone')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -48,7 +48,7 @@
 
                     <div class="col-12 mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control @error('address') is-invalid @enderror"
+                        <textarea class="form-control @error('address') is-invalid @enderror" placeholder="Enter Address"
                             id="address" name="address" rows="2">{{ old('address') }}</textarea>
                         @error('address')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="employee_id" class="form-label">Employee ID <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('employee_id') is-invalid @enderror"
+                        <input type="text" class="form-control @error('employee_id') is-invalid @enderror" placeholder="Enter Employee ID"
                             id="employee_id" name="employee_id" value="{{ old('employee_id') }}" required>
                         @error('employee_id')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -105,7 +105,7 @@
                 <div class="row" id="commissionFields" style="display: {{ in_array(old('employment_type'), ['commission', 'both']) ? 'block' : 'none' }};">
                     <div class="col-md-6 mb-3">
                         <label for="commission_percentage" class="form-label">Commission Percentage (%)</label>
-                        <input type="number" step="0.01" min="0" max="100" class="form-control @error('commission_percentage') is-invalid @enderror"
+                        <input type="number" step="0.01" min="0" max="100" class="form-control @error('commission_percentage') is-invalid @enderror" placeholder="Enter Commission Percentage (%)"
                             id="commission_percentage" name="commission_percentage" value="{{ old('commission_percentage') }}">
                         @error('commission_percentage')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -116,7 +116,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="qualification" class="form-label">Qualification</label>
-                        <input type="text" class="form-control @error('qualification') is-invalid @enderror"
+                        <input type="text" class="form-control @error('qualification') is-invalid @enderror" placeholder="Enter Qualification"
                             id="qualification" name="qualification" value="{{ old('qualification') }}">
                         @error('qualification')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -125,7 +125,7 @@
 
                     <div class="col-md-4 mb-3">
                         <label for="experience_years" class="form-label">Experience (Years)</label>
-                        <input type="number" class="form-control @error('experience_years') is-invalid @enderror"
+                        <input type="number" class="form-control @error('experience_years') is-invalid @enderror" placeholder="Enter Experience"
                             id="experience_years" name="experience_years" value="{{ old('experience_years') }}">
                         @error('experience_years')
                         <div class="invalid-feedback">{{ $message }}</div>

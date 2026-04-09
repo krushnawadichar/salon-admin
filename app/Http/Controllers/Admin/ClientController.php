@@ -8,11 +8,33 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function index()
-    {
-        $clients = Client::all();
-        return view('admin.clients.index', compact('clients'));
+public function index(Request $request)
+{
+    $query = Client::query();
+
+    // Search (name, email, phone)
+    if ($request->search) {
+        $query->where(function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->search . '%')
+              ->orWhere('email', 'like', '%' . $request->search . '%')
+              ->orWhere('phone', 'like', '%' . $request->search . '%');
+        });
     }
+
+    // Status filter
+    if ($request->status) {
+        $query->where('status', $request->status);
+    }
+
+      // Gender filter 
+    if ($request->gender) {
+        $query->where('gender', $request->gender);
+    }
+
+    $clients = $query->latest()->paginate(10);
+
+    return view('admin.clients.index', compact('clients'));
+}
 
     public function create()
     {

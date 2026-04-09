@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="client_id" class="form-label">Client <span class="text-danger">*</span></label>
-                        <select class="form-control @error('client_id') is-invalid @enderror" 
+                        <select class="form-control select2  @error('client_id') is-invalid @enderror" 
                                 id="client_id" name="client_id" required>
                             <option value="">Select Client</option>
                             @foreach($clients as $client)

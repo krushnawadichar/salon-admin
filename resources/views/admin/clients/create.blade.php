@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Full Name" 
                                id="name" name="name" value="{{ old('name') }}" required>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -28,7 +28,7 @@
                     
                     <div class="col-md-6 mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" 
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email"
                                id="email" name="email" value="{{ old('email') }}">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -37,7 +37,7 @@
                     
                     <div class="col-md-6 mb-3">
                         <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror"  placeholder="Enter Phone"
                                id="phone" name="phone" value="{{ old('phone') }}" required>
                         @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -68,7 +68,7 @@
                     
                     <div class="col-12 mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control @error('address') is-invalid @enderror" 
+                        <textarea class="form-control @error('address') is-invalid @enderror" placeholder="Enter Address"
                                   id="address" name="address" rows="2">{{ old('address') }}</textarea>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -77,7 +77,7 @@
                     
                     <div class="col-12 mb-3">
                         <label for="notes" class="form-label">Notes</label>
-                        <textarea class="form-control @error('notes') is-invalid @enderror" 
+                        <textarea class="form-control @error('notes') is-invalid @enderror" placeholder="Enter Notes" 
                                   id="notes" name="notes" rows="3">{{ old('notes') }}</textarea>
                         @error('notes')
                             <div class="invalid-feedback">{{ $message }}</div>
