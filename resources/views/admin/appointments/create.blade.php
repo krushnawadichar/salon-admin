@@ -22,6 +22,7 @@
                         <select class="form-control select2  @error('client_id') is-invalid @enderror" 
                                 id="client_id" name="client_id" required>
                             <option value="">Select Client</option>
+                            <option value="new">New</option>
                             @foreach($clients as $client)
                                 <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>
                                     {{ $client->name }} ({{ $client->phone }})
@@ -29,6 +30,38 @@
                             @endforeach
                         </select>
                         @error('client_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-4 mb-3 d-none" id="new_client_name_div">
+                        <label for="new_client_name" class="form-label">
+                            Client Name <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" 
+                            class="form-control @error('new_client_name') is-invalid @enderror"
+                            id="new_client_name" 
+                            name="new_client_name"
+                            value="{{ old('new_client_name') }}"
+                            placeholder="Enter Client Name">
+
+                        @error('new_client_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-4 mb-3 d-none" id="new_client_phone_div">
+                        <label for="new_client_phone" class="form-label">
+                            Client Number <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" 
+                            class="form-control @error('new_client_phone') is-invalid @enderror"
+                            id="new_client_phone" 
+                            name="new_client_phone"
+                            value="{{ old('new_client_phone') }}"
+                            placeholder="Enter Client Number">
+
+                        @error('new_client_phone')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -176,6 +209,32 @@
         // Initial calculation
         calculateTotals();
     });
+
+    function toggleNewClientFields() {
+    let clientValue = $('#client_id').val();
+
+    if (clientValue === 'new') {
+        $('#new_client_name_div').removeClass('d-none');
+        $('#new_client_phone_div').removeClass('d-none');
+
+        $('#new_client_name').prop('required', true);
+        $('#new_client_phone').prop('required', true);
+    } else {
+        $('#new_client_name_div').addClass('d-none');
+        $('#new_client_phone_div').addClass('d-none');
+
+        $('#new_client_name').prop('required', false).val('');
+        $('#new_client_phone').prop('required', false).val('');
+    }
+}
+
+// On change
+$('#client_id').change(function () {
+    toggleNewClientFields();
+});
+
+// Page load ke time
+toggleNewClientFields();
 </script>
 @endpush
 @endsection

@@ -35,7 +35,7 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'client_id' => 'required|exists:clients,id',
+            'client_id' => 'nullable',
             'employee_id' => 'required|exists:employees,id',
             'appointment_date' => 'required|date',
             'start_time' => 'required',
@@ -45,7 +45,20 @@ class AppointmentController extends Controller
             'notes' => 'nullable|string'
         ]);
 
-        DB::transaction(function () use ($request) {
+        if ($request->client_id == 'new') {
+
+            $client = Client::create([
+                'name'  => $request->new_client_name,
+                'phone' => $request->new_client_phone,
+            ]);
+
+            $clientId = $client->id;
+
+        } else {
+            $clientId = $request->client_id;
+        }
+
+        DB::transaction(function () use ($request, $clientId) {
             // Calculate total amount from selected services
             $services = Service::whereIn('id', $request->services)->get();
             $totalAmount = $services->sum('price');
@@ -60,7 +73,7 @@ class AppointmentController extends Controller
             // Create appointment
             $appointment = Appointment::create([
                 'appointment_number' => 'APT-' . time(),
-                'client_id' => $request->client_id,
+                'client_id' => $clientId,
                 'employee_id' => $request->employee_id,
                 'appointment_date' => $request->appointment_date,
                 'start_time' => $startTime,
@@ -79,7 +92,7 @@ class AppointmentController extends Controller
             }
 
             // Update client total visits
-            $client = Client::find($request->client_id);
+            $client = Client::find($clientId);
             $client->increment('total_visits');
         });
 
