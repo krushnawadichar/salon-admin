@@ -3,6 +3,20 @@
 @section('title', 'New Appointment')
 
 @section('content')
+<style>#service_search {
+    border: 2px solid #4e73df;
+    border-radius: 10px;
+    padding: 10px 15px;
+    box-shadow: 0 0 10px rgba(78, 115, 223, 0.15);
+    transition: all 0.3s ease;
+}
+
+#service_search:focus {
+    border-color: #1cc88a;
+    box-shadow: 0 0 15px rgba(28, 200, 138, 0.35);
+    outline: none;
+    background-color: #f8fff9;
+}</style>
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">New Appointment</h1>
@@ -103,22 +117,42 @@
                 </div>
                 
                 <h5 class="border-bottom pb-2 mb-3">Select Services</h5>
-                <div class="row mb-3">
+
+                <div class="row mb-3 justify-content-end">
+                    <div class="col-md-4">
+                        <label for="service_search" class="form-label fw-bold">
+                            Search Service
+                        </label>
+
+                        <input type="text"
+                            id="service_search"
+                            class="form-control"
+                            placeholder="🔍 Search service name...">
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-3" id="services_container">
                     @foreach($services as $service)
-                    <div class="col-md-3 mb-2">
+                    <div class="col-md-3 mb-2 service-item">
                         <div class="form-check">
-                            <input class="form-check-input service-checkbox" type="checkbox" 
-                                   name="services[]" value="{{ $service->id }}" 
-                                   id="service{{ $service->id }}"
-                                   data-price="{{ $service->price }}"
-                                   data-duration="{{ $service->duration }}"
-                                   {{ is_array(old('services')) && in_array($service->id, old('services')) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="service{{ $service->id }}">
-                                {{ $service->name }} - ₹{{ $service->price }} ({{ $service->duration }} mins)
+                            <input class="form-check-input service-checkbox"
+                                type="checkbox"
+                                name="services[]"
+                                value="{{ $service->id }}"
+                                id="service{{ $service->id }}"
+                                data-price="{{ $service->price }}"
+                                data-duration="{{ $service->duration }}"
+                                {{ is_array(old('services')) && in_array($service->id, old('services')) ? 'checked' : '' }}>
+
+                            <label class="form-check-label service-name"
+                                for="service{{ $service->id }}">
+                                {{ $service->name }} - ₹{{ $service->price }}
+                                ({{ $service->duration }} mins)
                             </label>
                         </div>
                     </div>
                     @endforeach
+
                     @error('services')
                         <div class="text-danger mt-2">{{ $message }}</div>
                     @enderror
@@ -235,6 +269,26 @@ $('#client_id').change(function () {
 
 // Page load ke time
 toggleNewClientFields();
+
+// Service Search
+$('#service_search').on('keyup', function () {
+
+    let searchValue = $(this).val().toLowerCase();
+
+    $('.service-item').each(function () {
+
+        let serviceName = $(this)
+            .find('.service-name')
+            .text()
+            .toLowerCase();
+
+        if (serviceName.includes(searchValue)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}); 
 </script>
 @endpush
 @endsection
