@@ -58,14 +58,14 @@
 
                 <h5 class="border-bottom pb-2 mb-3">Employee Details</h5>
                 <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label for="employee_id" class="form-label">Employee ID <span class="text-danger">*</span></label>
+                    {{-- <div class="col-md-4 mb-3">
+                        <label for="employee_id" class="form-label">Employee ID</label>
                         <input type="text" class="form-control @error('employee_id') is-invalid @enderror" placeholder="Enter Employee ID"
-                            id="employee_id" name="employee_id" value="{{ old('employee_id') }}" required>
+                            id="employee_id" name="employee_id" value="{{ old('employee_id') }}">
                         @error('employee_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="col-md-4 mb-3">
                         <label for="employment_type" class="form-label">Employment Type <span class="text-danger">*</span></label>
@@ -82,9 +82,9 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <label for="joining_date" class="form-label">Joining Date <span class="text-danger">*</span></label>
+                        <label for="joining_date" class="form-label">Joining Date</label>
                         <input type="date" class="form-control @error('joining_date') is-invalid @enderror"
-                            id="joining_date" name="joining_date" value="{{ old('joining_date') }}" required>
+                            id="joining_date" name="joining_date" value="{{ old('joining_date') }}">
                         @error('joining_date')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="row" id="salaryFields" style="display: {{ in_array(old('employment_type'), ['salary', 'both']) ? 'block' : 'none' }};">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="salary_amount" class="form-label">Salary Amount ($)</label>
                         <input type="number" step="0.01" class="form-control @error('salary_amount') is-invalid @enderror"
                             id="salary_amount" name="salary_amount" value="{{ old('salary_amount') }}">
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="row" id="commissionFields" style="display: {{ in_array(old('employment_type'), ['commission', 'both']) ? 'block' : 'none' }};">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="commission_percentage" class="form-label">Commission Percentage (%)</label>
                         <input type="number" step="0.01" min="0" max="100" class="form-control @error('commission_percentage') is-invalid @enderror" placeholder="Enter Commission Percentage (%)"
                             id="commission_percentage" name="commission_percentage" value="{{ old('commission_percentage') }}">

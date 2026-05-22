@@ -50,4 +50,32 @@ class Employee extends Model
     {
         return $query->where('status', 'active');
     }
+
+protected static function boot()
+{
+    parent::boot();
+
+    static::creating(function ($employee) {
+
+        // Agar employee_id already set hai to skip
+        if (!empty($employee->employee_id)) {
+            return;
+        }
+
+        // Last employee get
+        $lastEmployee = self::whereNotNull('employee_id')
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $newNumber = 1;
+
+        if ($lastEmployee && preg_match('/EMP(\d+)/', $lastEmployee->employee_id, $matches)) {
+            $newNumber = ((int) $matches[1]) + 1;
+        }
+
+        // Generate unique employee id
+        $employee->employee_id =
+            'EMP' . str_pad($newNumber, 3, '0', STR_PAD_LEFT);
+    });
+}
 }

@@ -159,6 +159,15 @@
                         <i class="fas fa-calendar-check me-2"></i> My Appointments
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('employee.booking.*') ? 'active' : '' }}">
+                    <a href="#appointmentSubmenu" data-bs-toggle="collapse" aria-expanded="{{ request()->routeIs('employee.booking.*') ? 'true' : 'false' }}" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt me-2"></i> Appointments
+                    </a>
+                    <ul class="collapse list-unstyled {{ request()->routeIs('employee.booking.*') ? 'show' : '' }}" id="appointmentSubmenu">
+                        <li><a href="{{ route('employee.booking.index') }}"><i class="fas fa-list ms-4 me-2"></i> All Appointments</a></li>
+                        <li><a href="{{ route('employee.booking.create') }}"><i class="fas fa-plus ms-4 me-2"></i> New Appointment</a></li>
+                    </ul>
+                </li>
                 
                 <li class="{{ request()->routeIs('employee.commissions*') ? 'active' : '' }}">
                     <a href="{{ route('employee.commissions') }}">

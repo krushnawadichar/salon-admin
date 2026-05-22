@@ -11,6 +11,7 @@ use App\Http\Controllers\Employee\DashboardController as EmployeeDashboardContro
 use App\Http\Controllers\Employee\AppointmentController as EmployeeAppointmentController;
 use App\Http\Controllers\Employee\CommissionController as EmployeeCommissionController;
 use App\Http\Controllers\Employee\ProfileController as EmployeeProfileController;
+use App\Http\Controllers\Employee\BookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {   
@@ -40,26 +41,26 @@ Route::middleware(['auth'])->group(function () {
             // Employees
             Route::resource('employees', EmployeeController::class);
             // Add these routes inside the admin group after the existing employee routes
-Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
-Route::patch('/employees/{employee}/deactivate', [EmployeeController::class, 'deactivate'])->name('employees.deactivate');
-Route::patch('/employees/{employee}/activate', [EmployeeController::class, 'activate'])->name('employees.activate');
-Route::patch('/employees/{employee}/update-schedule', [EmployeeController::class, 'updateSchedule'])->name('employees.update-schedule');
-Route::post('/employees/check-email', [EmployeeController::class, 'checkEmail'])->name('employees.check-email');
+            Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+            Route::patch('/employees/{employee}/deactivate', [EmployeeController::class, 'deactivate'])->name('employees.deactivate');
+            Route::patch('/employees/{employee}/activate', [EmployeeController::class, 'activate'])->name('employees.activate');
+            Route::patch('/employees/{employee}/update-schedule', [EmployeeController::class, 'updateSchedule'])->name('employees.update-schedule');
+            Route::post('/employees/check-email', [EmployeeController::class, 'checkEmail'])->name('employees.check-email');
             
             // Clients
             Route::resource('clients', ClientController::class);
             // Add these routes inside the admin group after the existing client routes
-Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
-Route::patch('/clients/{client}/deactivate', [ClientController::class, 'deactivate'])->name('clients.deactivate');
-Route::patch('/clients/{client}/activate', [ClientController::class, 'activate'])->name('clients.activate');
-Route::post('/clients/check-duplicate', [ClientController::class, 'checkDuplicate'])->name('clients.check-duplicate');
+            Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
+            Route::patch('/clients/{client}/deactivate', [ClientController::class, 'deactivate'])->name('clients.deactivate');
+            Route::patch('/clients/{client}/activate', [ClientController::class, 'activate'])->name('clients.activate');
+            Route::post('/clients/check-duplicate', [ClientController::class, 'checkDuplicate'])->name('clients.check-duplicate');
             
             // Appointments
             Route::resource('appointments', AppointmentController::class);
             Route::post('/appointments/{appointment}/payment', [AppointmentController::class, 'processPayment'])->name('appointments.payment');
 
             Route::patch('/appointments/{appointment}/update-payment-status', [AppointmentController::class, 'updatePaymentStatus'])->name('appointments.update-payment-status');
-Route::patch('/appointments/{appointment}/full-payment', [AppointmentController::class, 'fullPayment'])->name('appointments.full-payment');
+            Route::patch('/appointments/{appointment}/full-payment', [AppointmentController::class, 'fullPayment'])->name('appointments.full-payment');
             
             // Reports
             Route::get('/reports/daily', [ReportController::class, 'dailyReport'])->name('reports.daily');
@@ -82,6 +83,34 @@ Route::patch('/appointments/{appointment}/full-payment', [AppointmentController:
             Route::put('/profile/password', [EmployeeProfileController::class, 'updatePassword'])->name('profile.password');
             Route::post('/appointments/{appointment}/status', [EmployeeAppointmentController::class, 'updateStatus'])->name('appointments.update-status');
             Route::get('/appointments/{appointment}', [EmployeeAppointmentController::class, 'show'])->name('appointments.show');
+
+                        // Appointments
+            // Route::resource('appointments', AppointmentController::class);
+            Route::post('/booking/{appointment}/payment', [AppointmentController::class, 'processPayment'])->name('booking.payment');
+
+            Route::patch('/booking/{appointment}/update-payment-status', [AppointmentController::class, 'updatePaymentStatus'])->name('booking.update-payment-status');
+            Route::patch('/booking/{appointment}/full-payment', [AppointmentController::class, 'fullPayment'])->name('booking.full-payment');
+                    Route::get('/booking', [BookingController::class, 'index'])
+            ->name('booking.index');
+
+        Route::get('/booking/create', [BookingController::class, 'create'])
+            ->name('booking.create');
+
+        Route::post('/booking', [BookingController::class, 'store'])
+            ->name('booking.store');
+
+        Route::get('/booking/{appointment}', [BookingController::class, 'show'])
+            ->name('booking.show');
+
+        Route::get('/booking/{appointment}/edit', [BookingController::class, 'edit'])
+            ->name('booking.edit');
+
+        Route::put('/booking/{appointment}', [BookingController::class, 'update'])
+            ->name('booking.update');
+
+        Route::delete('/booking/{appointment}', [BookingController::class, 'destroy'])
+            ->name('booking.destroy');
+
         });
 }); 
 

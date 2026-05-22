@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
@@ -12,15 +12,18 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AppointmentController extends Controller
+class BookingController extends Controller
 {
     public function index()
     {
+        $employee = Employee::where('user_id', auth()->id())->first();
+
         $appointments = Appointment::with(['client', 'employee', 'services'])
-            ->orderBy('id', 'desc')
+            ->where('employee_id', $employee->id)
+            ->latest()
             ->paginate(10);
-        
-        return view('admin.appointments.index', compact('appointments'));
+
+        return view('employee.bookings.index', compact('appointments'));
     }
 
     public function create()
@@ -29,14 +32,14 @@ class AppointmentController extends Controller
         $employees = Employee::with('user')->active()->get();
         $services = Service::active()->get();
         
-        return view('admin.appointments.create', compact('clients', 'employees', 'services'));
+        return view('employee.bookings.create', compact('clients', 'employees', 'services'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'client_id' => 'nullable',
-            'employee_id' => 'required|exists:employees,id',
+            // 'employee_id' => 'required|exists:employees,id',
             'appointment_date' => 'required|date',
             'start_time' => 'required',
             'services' => 'required|array|min:1',
@@ -70,11 +73,13 @@ class AppointmentController extends Controller
             $startTime = \Carbon\Carbon::parse($request->start_time);
             $endTime = $startTime->copy()->addMinutes($totalDuration);
 
+            $employee = Employee::where('user_id', auth()->id())->first();
+
             // Create appointment
             $appointment = Appointment::create([
                 'appointment_number' => 'APT-' . time(),
                 'client_id' => $clientId,
-                'employee_id' => $request->employee_id,
+                'employee_id' => $employee->id,
                 'appointment_date' => $request->appointment_date,
                 'start_time' => $startTime,
                 'end_time' => $endTime,
@@ -96,14 +101,14 @@ class AppointmentController extends Controller
             $client->increment('total_visits');
         });
 
-        return redirect()->route('admin.appointments.index')
+        return redirect()->route('employee.booking.index')
             ->with('success', 'Appointment created successfully.');
     }
 
     public function show(Appointment $appointment)
     {
         $appointment->load(['client', 'employee.user', 'services', 'payments']);
-        return view('admin.appointments.show', compact('appointment'));
+        return view('employee.bookings.show', compact('appointment'));
     }
 
     public function edit(Appointment $appointment)
@@ -113,7 +118,7 @@ class AppointmentController extends Controller
         $services = Service::active()->get();
         $selectedServices = $appointment->services->pluck('id')->toArray();
         
-        return view('admin.appointments.edit', compact('appointment', 'clients', 'employees', 'services', 'selectedServices'));
+        return view('employee.bookings.edit', compact('appointment', 'clients', 'employees', 'services', 'selectedServices'));
     }
 
     public function update(Request $request, Appointment $appointment)
@@ -168,7 +173,7 @@ class AppointmentController extends Controller
             }
         });
 
-        return redirect()->route('admin.appointments.index')
+        return redirect()->route('employee.booking.index')
             ->with('success', 'Appointment updated successfully.');
     }
 
@@ -209,7 +214,7 @@ class AppointmentController extends Controller
             $client->increment('total_spent', $request->amount);
         });
 
-        return redirect()->route('admin.appointments.show', $appointment)
+        return redirect()->route('employee.booking.show', $appointment)
             ->with('success', 'Payment processed successfully.');
     }
 
@@ -258,11 +263,6 @@ class AppointmentController extends Controller
         $appointment->update([
             'payment_status' => $request->payment_status
         ]);
-        if($request->payment_status === 'paid') {
-            $appointment->update([
-                'appointment_status' => 'completed'
-            ]);
-        }
 
         // If appointment is completed and payment is paid, process commission
         if ($appointment->appointment_status === 'completed' && $request->payment_status === 'paid') {
@@ -270,15 +270,7 @@ class AppointmentController extends Controller
         }
     });
 
-    if(auth()->user()->role =='employee'){
-        return redirect()->route('employee.booking.index', $appointment)
-            ->with('success', 'Payment status updated successfully.');
-    } else {
-        return redirect()->route('admin.appointments.index', $appointment)
-            ->with('success', 'Payment status updated successfully.');  
-    }
-
-    return redirect()->route('admin.appointments.edit', $appointment)
+    return redirect()->route('employee.booking.edit', $appointment)
         ->with('success', 'Payment status updated successfully.');
 }
 
@@ -316,7 +308,7 @@ public function fullPayment(Request $request, Appointment $appointment)
         }
     });
 
-    return redirect()->route('admin.appointments.edit', $appointment)
+    return redirect()->route('employee.booking.edit', $appointment)
         ->with('success', 'Appointment marked as fully paid.');
 }
 }

@@ -87,11 +87,10 @@
                                        value="{{ $employee->employee_id }}" readonly>
                                 <small class="text-muted">Auto-generated and cannot be changed</small>
                             </div>
-                            
                             <div class="col-md-4 mb-3">
                                 <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control @error('phone') is-invalid @enderror" 
-                                       id="phone" name="phone" value="{{ old('phone', $employee->phone) }}" required>
+                                       id="phone" name="phone" value="{{ old('phone', $employee->user->phone) }}" required>
                                 @error('phone')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
