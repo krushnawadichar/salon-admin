@@ -68,6 +68,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/reports/commission', [ReportController::class, 'commissionReport'])->name('reports.commission');
             Route::get('/reports/salary', [ReportController::class, 'salaryReport'])->name('reports.salary');
             Route::post('/reports/process-salary', [ReportController::class, 'processSalary'])->name('reports.process-salary');
+
+            Route::patch('/booking/{appointment}/update-payment-status', [AppointmentController::class, 'updatePaymentStatus'])->name('booking.update-payment-status');
+
         });
     
     // Employee Routes - Fix: Use middleware as array with string

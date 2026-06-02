@@ -43,11 +43,157 @@
                                 @endforeach
                             </td>
                             <td>₹{{ number_format($appointment->final_amount, 2) }}</td>
-                            <td>
+                                                        <td>
+                            <button type="button"
+                                class="btn btn-sm 
+                                {{ $appointment->payment_status == 'paid' ? 'btn-success' : ($appointment->payment_status == 'partial' ? 'btn-warning' : 'btn-danger') }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#paymentModal{{ $appointment->id }}">
+
+                                @if($appointment->payment_status == 'paid')
+                                    <i class="fas fa-check-circle"></i> Paid
+                                @elseif($appointment->payment_status == 'partial')
+                                    <i class="fas fa-hourglass-half"></i> Partial
+                                @else
+                                    <i class="fas fa-clock"></i> Pending
+                                @endif
+                            </button>
+
+                                <!-- Payment Status Modal -->
+                                <div class="modal fade"
+                                    id="paymentModal{{ $appointment->id }}"
+                                    tabindex="-1"
+                                    role="dialog">
+
+                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
+                                        <div class="modal-content shadow">
+
+                                            <div class="modal-header bg-primary text-white">
+                                                <h5 class="modal-title">
+                                                    Change Payment Status
+                                                </h5>
+                                                <button type="button"
+                                                    class="btn-close btn-close-white"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+
+                                                <div class="mb-3">
+                                                    <strong>Appointment:</strong>
+                                                    {{ $appointment->appointment_number }}
+                                                    <br>
+
+                                                    <strong>Client:</strong>
+                                                    {{ $appointment->client->name }}
+                                                    <br>
+
+                                                    <strong>Total Amount:</strong>
+                                                    ₹{{ number_format($appointment->final_amount, 2) }}
+                                                </div>
+
+                                                <form action="{{ route('admin.booking.update-payment-status', $appointment) }}"
+                                                    method="POST">
+
+                                                    @csrf
+                                                    @method('PATCH')
+
+                                                    <!-- Payment Status -->
+                                                    <div class="form-group">
+                                                        <label>
+                                                            Payment Status
+                                                        </label>
+
+                                                        <select class="form-control payment-status"
+                                                            name="payment_status"
+                                                            data-id="{{ $appointment->id }}">
+
+                                                            
+                                                            <option value="paid" selected>
+                                                                ✅ Paid
+                                                            </option>
+
+                                                            <option value="pending"
+                                                                >
+                                                                ⏳ Pending
+                                                            </option>
+
+                                                            <option value="partial"
+                                                                {{ $appointment->payment_status == 'partial' ? 'selected' : '' }}>
+                                                                🔶 Partial
+                                                            </option>
+
+                                                            <option value="refunded"
+                                                                {{ $appointment->payment_status == 'refunded' ? 'selected' : '' }}>
+                                                                ↩️ Refunded
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!-- Partial Payment -->
+                                                    <div id="paymentFields{{ $appointment->id }}"
+                                                        style="{{ $appointment->payment_status == 'partial' ? '' : 'display:none;' }}">
+
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Payment Amount
+                                                            </label>
+
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        ₹
+                                                                    </span>
+                                                                </div>
+
+                                                                <input type="number"
+                                                                    class="form-control"
+                                                                    step="0.01"
+                                                                    min="0.01"
+                                                                    max="{{ $appointment->final_amount }}"
+                                                                    name="payment_amount"
+                                                                    value="{{ $appointment->final_amount }}">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>
+                                                                Payment Method
+                                                            </label>
+
+                                                            <select class="form-control"
+                                                                name="payment_method">
+
+                                                                <option value="cash">💵 Cash</option>
+                                                                <option value="card">💳 Card</option>
+                                                                <option value="upi">📱 UPI</option>
+                                                                <option value="other">🔄 Other</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-block mt-2">
+
+                                                        <i class="fas fa-save"></i>
+                                                        Update Status
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            {{-- <td>
                                 <span class="badge bg-{{ $appointment->payment_status == 'paid' ? 'success' : ($appointment->payment_status == 'partial' ? 'warning' : 'danger') }}">
                                     {{ ucfirst($appointment->payment_status) }}
                                 </span>
-                            </td>
+                            </td> --}}
                             <td>
                                 <span class="badge bg-{{ $appointment->appointment_status == 'completed' ? 'success' : ($appointment->appointment_status == 'scheduled' ? 'primary' : 'danger') }}">
                                     {{ ucfirst($appointment->appointment_status) }}

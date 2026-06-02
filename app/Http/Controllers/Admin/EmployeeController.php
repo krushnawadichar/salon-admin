@@ -82,51 +82,105 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee', 'services', 'employeeServices'));
     }
 
+    // public function update(Request $request, Employee $employee)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users,email,' . $employee->user_id,
+    //         'phone' => 'required|string|max:20',
+    //         'address' => 'nullable|string',
+    //         'employee_id' => 'required|string|unique:employees,employee_id,' . $employee->id,
+    //         'employment_type' => 'required|in:salary,commission,both',
+    //         'salary_amount' => 'required_if:employment_type,salary,both|nullable|numeric|min:0',
+    //         'commission_percentage' => 'required_if:employment_type,commission,both|nullable|numeric|min:0|max:100',
+    //         'joining_date' => 'required|date',
+    //         'qualification' => 'nullable|string',
+    //         'experience_years' => 'nullable|integer|min:0',
+    //         'status' => 'required|in:active,inactive',
+    //         'services' => 'array',
+    //         'services.*' => 'exists:services,id'
+    //     ]);
+
+    //     // Update user
+    //     $employee->user->update([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'phone' => $request->phone,
+    //         'address' => $request->address
+    //     ]);
+
+    //     // Update employee
+    //     $employee->update([
+    //         'employee_id' => $request->employee_id,
+    //         'employment_type' => $request->employment_type,
+    //         'salary_amount' => $request->salary_amount,
+    //         'commission_percentage' => $request->commission_percentage,
+    //         'joining_date' => $request->joining_date,
+    //         'qualification' => $request->qualification,
+    //         'experience_years' => $request->experience_years,
+    //         'status' => $request->status
+    //     ]);
+
+    //     // Sync services
+    //     $employee->services()->sync($request->services ?? []);
+
+    //     return redirect()->route('admin.employees.index')
+    //         ->with('success', 'Employee updated successfully.');
+    // }
+
     public function update(Request $request, Employee $employee)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $employee->user_id,
-            'phone' => 'required|string|max:20',
-            'address' => 'nullable|string',
-            'employee_id' => 'required|string|unique:employees,employee_id,' . $employee->id,
-            'employment_type' => 'required|in:salary,commission,both',
-            'salary_amount' => 'required_if:employment_type,salary,both|nullable|numeric|min:0',
-            'commission_percentage' => 'required_if:employment_type,commission,both|nullable|numeric|min:0|max:100',
-            'joining_date' => 'required|date',
-            'qualification' => 'nullable|string',
-            'experience_years' => 'nullable|integer|min:0',
-            'status' => 'required|in:active,inactive',
-            'services' => 'array',
-            'services.*' => 'exists:services,id'
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $employee->user_id,
+        'phone' => 'required|string|max:20',
+        'address' => 'nullable|string',
 
-        // Update user
-        $employee->user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'address' => $request->address
-        ]);
+        'employment_type' => 'nullable|in:salary,commission,both',
+        'salary_amount' => 'nullable|numeric|min:0',
+        'commission_percentage' => 'nullable|numeric|min:0|max:100',
+        'joining_date' => 'required|date',
+        'qualification' => 'nullable|string',
+        'experience_years' => 'nullable|numeric|min:0',
+        'status' => 'required|string',
 
-        // Update employee
-        $employee->update([
-            'employee_id' => $request->employee_id,
-            'employment_type' => $request->employment_type,
-            'salary_amount' => $request->salary_amount,
-            'commission_percentage' => $request->commission_percentage,
-            'joining_date' => $request->joining_date,
-            'qualification' => $request->qualification,
-            'experience_years' => $request->experience_years,
-            'status' => $request->status
-        ]);
+        'password' => 'nullable|confirmed|min:6',
+        'services' => 'nullable|array',
+        'services.*' => 'exists:services,id',
+    ]);
 
-        // Sync services
-        $employee->services()->sync($request->services ?? []);
+    // Update User Table
+    $userData = [
+        'name'    => $request->name,
+        'email'   => $request->email,
+        'phone'   => $request->phone,
+        'address' => $request->address,
+    ];
 
-        return redirect()->route('admin.employees.index')
-            ->with('success', 'Employee updated successfully.');
+    if ($request->filled('password') || $request->filled('password_confirmation')) {
+        $userData['password'] = Hash::make($request->password ?? $request->password_confirmation);
     }
+
+    $employee->user->update($userData);
+
+    // Update Employee Table
+    $employee->update([
+        // 'employment_type'       => $request->employment_type,
+        'salary_amount'         => $request->salary_amount,
+        'commission_percentage' => $request->commission_percentage,
+        'joining_date'          => $request->joining_date,
+        'qualification'         => $request->qualification,
+        'experience_years'      => $request->experience_years,
+        'status'                => $request->status,
+    ]);
+
+    // Update Services
+    $employee->services()->sync($request->services ?? []);
+
+    return redirect()
+        ->route('admin.employees.index')
+        ->with('success', 'Employee updated successfully.');
+}
 
     public function destroy(Employee $employee)
     {

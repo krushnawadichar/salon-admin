@@ -65,7 +65,7 @@
                                     tabindex="-1"
                                     role="dialog">
 
-                                    <div class="modal-dialog modal-md" role="document">
+                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
                                         <div class="modal-content shadow">
 
                                             <div class="modal-header bg-primary text-white">
