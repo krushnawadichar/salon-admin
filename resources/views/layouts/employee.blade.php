@@ -777,7 +777,7 @@
         <button class="nav-item-bottom {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" data-mobile-route="dashboard">
             <i class="fas fa-tachometer-alt"></i><span>Home</span>
         </button>
-        <button class="nav-item-bottom {{ request()->routeIs('employee.appointments*') ? 'active' : '' }}" data-mobile-route="appointments">
+        <button class="nav-item-bottom {{ request()->routeIs('employee.booking.index') ? 'active' : '' }}" data-mobile-route="appointments">
             <i class="fas fa-calendar-check"></i><span>Appts</span>
         </button>
         <button class="nav-item-bottom {{ request()->routeIs('employee.booking.create') ? 'active' : '' }}" data-mobile-route="new-booking">
@@ -827,7 +827,7 @@
                 let route = $(this).data('mobile-route');
                 let urls = {
                     'dashboard': '{{ route("employee.dashboard") }}',
-                    'appointments': '{{ route("employee.appointments") }}',
+                    'appointments': '{{ route("employee.booking.index") }}',
                     'new-booking': '{{ route("employee.booking.create") }}',
                     'commissions': '{{ route("employee.commissions") }}',
                     'profile': '{{ route("employee.profile") }}'

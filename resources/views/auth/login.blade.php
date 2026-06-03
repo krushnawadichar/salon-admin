@@ -337,6 +337,19 @@
                 font-size: 2.5rem;
             }
         }
+
+
+
+.toggle-password {
+    left: auto !important;
+    right: 15px !important;
+}
+
+
+.input-group input {
+    width: 100%;
+    padding: 14px 45px 14px 45px; /* left & right icon space */
+}
     </style>
 </head>
 <body>
@@ -399,16 +412,19 @@
                     <!-- Password Field -->
                     <div class="input-group">
                         <label for="password">Password</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-lock"></i>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                required 
-                                placeholder="Enter your password"
-                            >
-                        </div>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    placeholder="Enter your password"
+                                >
+
+                                <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                            </div>
                         <!-- Error message for password -->
                         <span class="error-message" id="password-error"></span>
                     </div>
@@ -493,6 +509,20 @@
                 this.parentElement.style.transform = 'scale(1)';
             });
         });
+
+            const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        const type = password.getAttribute('type') === 'password'
+            ? 'text'
+            : 'password';
+
+        password.setAttribute('type', type);
+
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
     </script>
 </body>
 </html>
