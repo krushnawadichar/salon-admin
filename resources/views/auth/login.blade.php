@@ -377,7 +377,8 @@
                     <span>Luxury & Style</span>
                 </div> -->
                 <div class="logo">
-        <img src="{{ asset('build/assets/images/pablo-final.png') }}" alt="Pabelo Salon Logo" width="60%">
+        <img src="{{ asset('assets\imges\pablo_logo_1.png') }}" alt="Pabelo Salon Logo" width="60%">
+
         <h2>Pabelo Salon</h2>
         <span>Luxury & Style</span>
     </div>
