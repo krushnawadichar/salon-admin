@@ -15,7 +15,7 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered datatable" width="100%" cellspacing="0">
+                <table class="table table-bordered " width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Employee ID</th>
@@ -68,7 +68,7 @@
             </div>
             
             <div class="mt-3">
-                {{ $employees->links() }}
+                 {{ $employees->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>

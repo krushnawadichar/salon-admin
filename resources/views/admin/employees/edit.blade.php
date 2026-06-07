@@ -183,8 +183,8 @@
                                 <label for="joining_date" class="form-label">Joining Date <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control @error('joining_date') is-invalid @enderror" 
                                        id="joining_date" name="joining_date" 
-                                       value="{{ old('joining_date', $employee->joining_date->format('Y-m-d')) }}" 
-                                       max="{{ now()->format('Y-m-d') }}" required>
+                                        value="{{ old('joining_date', $employee->joining_date ? \Carbon\Carbon::parse($employee->joining_date)->format('Y-m-d') : '') }}"                                      
+                                        max="{{ now()->format('Y-m-d') }}">
                                 @error('joining_date')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

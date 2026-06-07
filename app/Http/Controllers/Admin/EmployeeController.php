@@ -139,7 +139,7 @@ class EmployeeController extends Controller
         'employment_type' => 'nullable|in:salary,commission,both',
         'salary_amount' => 'nullable|numeric|min:0',
         'commission_percentage' => 'nullable|numeric|min:0|max:100',
-        'joining_date' => 'required|date',
+        'joining_date' => 'nullable|date',
         'qualification' => 'nullable|string',
         'experience_years' => 'nullable|numeric|min:0',
         'status' => 'required|string',
