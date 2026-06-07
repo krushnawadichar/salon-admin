@@ -172,8 +172,9 @@
 <script>
 function updateStatus(appointmentId, status) {
     if (confirm('Are you sure you want to mark this appointment as ' + status + '?')) {
+
         $.ajax({
-            url: '{{ route("employee.appointments.update-status", $appointment) }}/' + appointmentId,
+            url: '/employee/appointments/' + appointmentId + '/status',
             type: 'POST',
             data: {
                 _token: '{{ csrf_token() }}',
@@ -185,6 +186,7 @@ function updateStatus(appointmentId, status) {
                 }
             }
         });
+
     }
 }
 </script>
