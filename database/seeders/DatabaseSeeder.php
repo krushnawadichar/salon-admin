@@ -29,26 +29,26 @@ class DatabaseSeeder extends Seeder
             // Create services
             ServiceSeeder::class,
             
-            // Create employee users and their employee records
-            EmployeeUserSeeder::class,
+            // // Create employee users and their employee records
+            // EmployeeUserSeeder::class,
             
-            // Create clients
-            ClientSeeder::class,
+            // // Create clients
+            // ClientSeeder::class,
             
-            // Assign services to employees
-            EmployeeServiceSeeder::class,
+            // // Assign services to employees
+            // EmployeeServiceSeeder::class,
             
-            // Create appointments
-            AppointmentSeeder::class,
+            // // Create appointments
+            // AppointmentSeeder::class,
             
-            // Create payments for completed appointments
-            PaymentSeeder::class,
+            // // Create payments for completed appointments
+            // PaymentSeeder::class,
             
-            // Create commissions based on appointments
-            CommissionSeeder::class,
+            // // Create commissions based on appointments
+            // CommissionSeeder::class,
             
-            // Create salary records
-            SalarySeeder::class,
+            // // Create salary records
+            // SalarySeeder::class,
         ]);
     }
 }
