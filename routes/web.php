@@ -14,9 +14,10 @@ use App\Http\Controllers\Employee\ProfileController as EmployeeProfileController
 use App\Http\Controllers\Employee\BookingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {   
-    return redirect()->route('login');
-});
+// Route::get('/login', function () {   
+//     return redirect()->route('login');
+// });
+
 
 Route::middleware(['auth'])->group(function () {
     // Redirect based on role
@@ -116,5 +117,20 @@ Route::middleware(['auth'])->group(function () {
 
         });
 }); 
+
+// frontend Routes
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+Route::get('/contact-us', function () {
+    return view('contact');
+})->name('contact');
+
+Route::get('about', function () {
+    return view('about');
+})->name('about');
 
 require __DIR__.'/auth.php';
