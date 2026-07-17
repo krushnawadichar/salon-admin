@@ -269,28 +269,8 @@
   </div>`
 </nav>
 
-<!-- ===== SCRIPT (minimal) ===== -->
-<script>
-  (function() {
-    const bookBtn = document.getElementById('bookNowBtn');
-    if (bookBtn) {
-      bookBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('📅 Booking modal would open here. (Integrate your own booking flow.)');
-      });
-    }
-    // smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  })();
-</script>
+@include('includes.booking-modal')
+
 
 </body>
 </html>

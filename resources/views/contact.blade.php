@@ -272,36 +272,7 @@
     <a href="{{ route('contact') }}" class="flex flex-col items-center text-[#a98892]"><span class="material-symbols-outlined">star</span><span class="text-[8px] uppercase font-bold">Contact</span></a>
   </div>
 </nav>
-
-<!-- ===== SCRIPT (minimal, keeps booking modal handlers alive but not used) ===== -->
-<script>
-  (function() {
-    // booking modal placeholder (not used on contact page, but keep for consistency)
-    const bookBtn = document.getElementById('bookNowBtn');
-    if (bookBtn) {
-      bookBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('📅 Booking modal would open here. (You can integrate your own booking flow.)');
-      });
-    }
-    // footer form demo
-    document.querySelector('.footer-form')?.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('✨ Thank you! We\'ll reach out soon.');
-      this.reset();
-    });
-    // smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  })();
-</script>
+@include('includes.booking-modal')
 
 </body>
 </html>

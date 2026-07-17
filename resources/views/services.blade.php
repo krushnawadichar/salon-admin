@@ -380,26 +380,8 @@
     <a href="{{ route('contact') }}" class="flex flex-col items-center text-[#a98892]"><span class="material-symbols-outlined">star</span><span class="text-[8px] uppercase font-bold">Contact</span></a>
   </div>
 </nav>
+@include('includes.booking-modal')
 
-<!-- ===== BOOKING MODAL ===== -->
-<div id="bookingModal" class="modal-overlay">
-  <div class="modal-box">
-    <div class="flex justify-between items-center mb-5">
-      <h3 class="text-2xl font-['Playfair_Display'] text-white">Book Now</h3>
-      <button id="closeModalBtn" class="text-white/40 hover:text-white transition text-3xl leading-none">&times;</button>
-    </div>
-    <form id="bookingForm" class="space-y-5">
-      <div><label class="text-xs uppercase tracking-wider text-[#a98892] block mb-1.5">Full Name</label><input type="text" placeholder="Your name" required /></div>
-      <div><label class="text-xs uppercase tracking-wider text-[#a98892] block mb-1.5">Phone Number</label><input type="tel" placeholder="+91 98765 43210" required /></div>
-      <div><label class="text-xs uppercase tracking-wider text-[#a98892] block mb-1.5">Email (optional)</label><input type="email" placeholder="you@example.com" /></div>
-      <div class="flex flex-col gap-3 pt-2">
-        <button type="submit" class="btn-primary">Book Appointment</button>
-        <button type="button" id="closeModalBtn2" class="btn-secondary">Cancel</button>
-      </div>
-      <p class="text-[10px] text-[#666] text-center mt-2">We'll confirm within 2 hours</p>
-    </form>
-  </div>
-</div>
 
 
 
@@ -517,27 +499,6 @@
     });
 
     renderPage(1);
-
-    // ----- modal -----
-    const modal = document.getElementById('bookingModal');
-    const openBtns = [document.getElementById('bookNowBtn')];
-    const closeBtns = [document.getElementById('closeModalBtn'), document.getElementById('closeModalBtn2')];
-
-    function openModal(e) { e.preventDefault(); modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-    function closeModal(e) { if (e) e.preventDefault(); modal.style.display = 'none'; document.body.style.overflow = ''; }
-
-    openBtns.forEach(btn => { if (btn) btn.addEventListener('click', openModal); });
-    closeBtns.forEach(btn => { if (btn) btn.addEventListener('click', closeModal); });
-    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(e); });
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('✅ Booking request received!');
-      closeModal(e);
-      this.reset();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(e);
-    });
 
   })();
 </script>

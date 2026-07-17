@@ -13,6 +13,7 @@ use App\Http\Controllers\Employee\CommissionController as EmployeeCommissionCont
 use App\Http\Controllers\Employee\ProfileController as EmployeeProfileController;
 use App\Http\Controllers\Employee\BookingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebsiteBookingController;
 
 // Route::get('/login', function () {   
 //     return redirect()->route('login');
@@ -119,9 +120,11 @@ Route::middleware(['auth'])->group(function () {
 }); 
 
 // frontend Routes
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/',[WebsiteBookingController::class,'index'])->name('home');
+
+Route::post('/book-appointment',
+    [WebsiteBookingController::class,'store'])
+    ->name('website.booking.store');
 Route::get('/services', function () {
     return view('services');
 })->name('services');
