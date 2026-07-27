@@ -4,6 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pabelo · Luxury Salon & Academy</title>
+   <!-- Basic SEO -->
+  <title>Pabelo Unisex Salon | Best Salon in Nagpur | Hair, Beauty, Bridal & Makeup Studio</title>
+
+  <meta name="description" content="Pabelo Unisex Salon is one of the best salons in Nagpur, Dighori and near Taj Bagh. We offer premium haircuts, hair colour, keratin treatment, hair spa, bridal makeup, facials, skincare, nail art and professional beauty services. Book your appointment today.">
+
+  <meta name="keywords" content="Best Salon in Nagpur, Best Salon Near Me, Best Unisex Salon in Nagpur, Best Salon in Dighori, Best Salon in Dighori Nagpur, Best Salon in Taj Bagh Nagpur, Hair Salon Nagpur, Beauty Salon Nagpur, Bridal Makeup Nagpur, Hair Spa Nagpur, Hair Colour Specialist Nagpur, Keratin Treatment Nagpur, Hair Smoothening Nagpur, Hair Botox Nagpur, Facial Nagpur, Hydra Facial Nagpur, Nail Art Nagpur, Groom Makeup Nagpur, Men's Salon Nagpur, Women's Salon Nagpur, Beauty Academy Nagpur, Pabelo Unisex Salon">
+
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Pabelo Unisex Salon">
+  <meta name="theme-color" content="#EC008C">
+
+  <link rel="canonical" href="https://pabelotheunisexsalon.com">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pabelo Unisex Salon | Best Salon in Nagpur">
+  <meta property="og:description" content="Luxury hair, beauty, bridal makeup, skincare and grooming services in Nagpur. Visit Pabelo Unisex Salon today.">
+  <meta property="og:url" content="https://pabelotheunisexsalon.com">
+  <meta property="og:image" content="https://pabelotheunisexsalon.com/assets/images/og-image.jpg">
+  <meta property="og:site_name" content="Pabelo Unisex Salon">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pabelo Unisex Salon | Best Salon in Nagpur">
+  <meta name="twitter:description" content="Premium hair, beauty, bridal makeup and skincare services in Nagpur.">
+  <meta name="twitter:image" content="https://pabelotheunisexsalon.com/assets/images/og-image.jpg">
+  
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
