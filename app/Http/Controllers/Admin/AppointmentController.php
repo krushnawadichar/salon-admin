@@ -319,4 +319,24 @@ public function fullPayment(Request $request, Appointment $appointment)
     return redirect()->route('admin.appointments.edit', $appointment)
         ->with('success', 'Appointment marked as fully paid.');
 }
+
+        public function bookApponment(Request $request)
+    {
+        $client = Client::create([
+            'name'  => $request->name,
+            'phone' => $request->phone,
+        ]);
+
+        Appointment::create([
+            'appointment_number' => 'APT-' . time(),
+            'client_id' => $client->id,
+            'appointment_date' => now(),
+            'payment_status' => 'pending',
+            'appointment_status' => 'scheduled',
+        ]);
+
+        return redirect()
+            ->route('appointment.create')
+            ->with('success', 'Your appointment has been booked successfully!');
+    }
 }

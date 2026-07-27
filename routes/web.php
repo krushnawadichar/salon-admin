@@ -117,4 +117,12 @@ Route::middleware(['auth'])->group(function () {
         });
 }); 
 
+
+Route::get('/salon-appointment', function () {
+    return view('apoinmentForm');
+})->name('appointment.create');
+
+Route::post('/appointment', [AppointmentController::class, 'bookApponment'])
+    ->name('appointment.store');
+
 require __DIR__.'/auth.php';
