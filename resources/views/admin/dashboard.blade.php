@@ -144,9 +144,9 @@
                                 <tr>
                                     <td>{{ $appointment->appointment_number }}</td>
                                     <td>{{ $appointment->client->name }}</td>
-                                    <td>{{ $appointment->employee->user->name }}</td>
+                                    <td>{{ $appointment?->employee?->user?->name }}</td>
                                     <td>{{ $appointment->appointment_date->format('d M Y') }}</td>
-                                    <td>{{ $appointment->start_time->format('H:i') }}</td>
+                                    <td>{{ $appointment?->start_time?->format('H:i') }}</td>
                                     <td>₹{{ number_format($appointment->final_amount, 2) }}</td>
                                     <td>
                                         <span class="badge bg-{{ $appointment->appointment_status == 'completed' ? 'success' : ($appointment->appointment_status == 'scheduled' ? 'primary' : 'danger') }}">
