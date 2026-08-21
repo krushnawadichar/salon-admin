@@ -120,7 +120,7 @@ Route::middleware(['auth'])->group(function () {
 }); 
 
 
-Route::get('/salon-appointment', function () {
+Route::get('/appointment', function () {
     return view('apoinmentForm');
 })->name('appointment.create');
 
