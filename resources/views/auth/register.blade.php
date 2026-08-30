@@ -552,7 +552,8 @@
 
                 <!-- Footer -->
                 <div class="footer">
-                    © {{ date('Y') }} Pabelo Salon. All rights reserved.
+                    <div>© {{ date('Y') }} Pabelo Salon. All rights reserved.</div>
+                    <div style="margin-top: 4px; font-size: 11px;">Designed &amp; Developed by <a href="https://codekrupa.com/" target="_blank" rel="noopener noreferrer" style="color: #EC008C; text-decoration: none; font-weight: 600;">Codekrupa IT Solution</a></div>
                 </div>
             </div>
         </div>

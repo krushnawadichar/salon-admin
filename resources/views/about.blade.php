@@ -247,8 +247,9 @@
         <p class="mt-4 text-xs text-[#666]">📍 Mumbai, MH, India</p>
       </div>
     </div>
-    <div class="border-t border-white/5 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-[#a98892]">
+    <div class="border-t border-white/5 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-[#a98892] gap-4 md:gap-0">
       <p>© 2026 Pabelo Unisex Salon &amp; Academy</p>
+      <p>Designed &amp; Developed by <a href="https://codekrupa.com/" target="_blank" rel="noopener noreferrer" class="text-[#D4AF37] hover:text-white hover:underline transition font-medium">Codekrupa IT Solution</a></p>
       <div class="flex gap-6 mt-3 md:mt-0">
         <a href="#" class="hover:text-white transition">Privacy</a>
         <a href="#" class="hover:text-white transition">Terms</a>

@@ -765,8 +765,9 @@
 
             <!-- Footer -->
             <footer class="footer">
-                <div class="container-fluid">
+                <div class="container-fluid d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
                     <span class="text-muted">© {{ date('Y') }} Salon Management System - Employee Panel</span>
+                    <span class="text-muted small">Designed &amp; Developed by <a href="https://codekrupa.com/" target="_blank" rel="noopener noreferrer" class="text-decoration-none fw-semibold text-primary">Codekrupa IT Solution</a></span>
                 </div>
             </footer>
         </div>

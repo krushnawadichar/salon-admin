@@ -367,7 +367,14 @@
       <div><h5 class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-4">Academy</h5><ul class="space-y-2 text-[#a98892] text-sm"><li><a href="#" class="hover:text-white transition">Hair Dressing</a></li><li><a href="#" class="hover:text-white transition">Cosmetology</a></li><li><a href="#" class="hover:text-white transition">Short Courses</a></li><li><a href="#" class="hover:text-white transition">Enrollment</a></li></ul></div>
       <div><h5 class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-4">Contact</h5><ul class="space-y-2 text-[#a98892] text-sm"><li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">location_on</span> Mumbai, MH, India</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span> +91 98765 43210</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">schedule</span> 10 AM – 8 PM</li></ul></div>
     </div>
-    <div class="border-t border-white/5 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-[#a98892]"><p>© 2026 Pabelo Unisex Salon &amp; Academy</p><div class="flex gap-6 mt-3 md:mt-0"><a href="#" class="hover:text-white transition">Privacy</a><a href="#" class="hover:text-white transition">Terms</a></div></div>
+    <div class="border-t border-white/5 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-[#a98892] gap-4 md:gap-0">
+      <p>© 2026 Pabelo Unisex Salon &amp; Academy</p>
+      <p>Designed &amp; Developed by <a href="https://codekrupa.com/" target="_blank" rel="noopener noreferrer" class="text-[#D4AF37] hover:text-white hover:underline transition font-medium">Codekrupa IT Solution</a></p>
+      <div class="flex gap-6 mt-3 md:mt-0">
+        <a href="#" class="hover:text-white transition">Privacy</a>
+        <a href="#" class="hover:text-white transition">Terms</a>
+      </div>
+    </div>
   </div>
 </footer>
 
