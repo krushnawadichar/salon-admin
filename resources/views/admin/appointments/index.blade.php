@@ -32,14 +32,14 @@
                     <tbody>
                         @foreach($appointments as $appointment)
                         <tr>
-                            <td>{{ $appointment->appointment_number }}</td>
-                            <td>{{ $appointment->client->name }}</td>
-                            <td>{{ $appointment->employee->user->name }}</td>
-                            <td>{{ $appointment->appointment_date->format('d M Y') }}</td>
-                            <td>{{ $appointment->start_time->format('H:i') }}</td>
+                            <td>{{ $appointment->appointment_number ?? '' }}</td>
+                            <td>{{ $appointment->client->name ?? '' }}</td>
+                            <td>{{ $appointment->employee->user->name ?? '' }}</td>
+                            <td>{{ $appointment->appointment_date?->format('d M Y') ?? '' }}</td>
+                           <td>{{ $appointment->start_time?->format('H:i') ?? '-' }}</td>
                             <td>
                                 @foreach($appointment->services as $service)
-                                    <span class="badge bg-info">{{ $service->name }}</span>
+                                    <span class="badge bg-info">{{ $service->name ?? '' }}</span>
                                 @endforeach
                             </td>
                             <td>₹{{ number_format($appointment->final_amount, 2) }}</td>
